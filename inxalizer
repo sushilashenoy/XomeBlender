@@ -591,9 +591,9 @@ def germ_caller(long_reads_f):
         while not Q.empty():
             Q.get()
         if 'chr' in str(chromosmes[0]):
-            vcffiles = sorted([f for f in os.listdir(os.getcwd()) if f.endswith('tmp.vcf')],key=lambda x: int(x[:-8].split('_')[-1][3:]))
+            vcffiles = sorted([f for f in os.listdir(os.getcwd()) if f.endswith('tmp.vcf')] and f.startswith(prefix), key=lambda x: int(x[:-8].split('_')[-1][3:]))
         else:    
-            vcffiles = sorted([f for f in os.listdir(os.getcwd()) if f.endswith('tmp.vcf')], key=lambda x: int(x[:-8].split('_')[-1]))                 
+            vcffiles = sorted([f for f in os.listdir(os.getcwd()) if f.endswith('tmp.vcf')] and f.startswith(prefix), key=lambda x: int(x[:-8].split('_')[-1]))                 
         with open(vcf_fusion_file_label, 'w') as vcf_fusion_file:
             for x, v in enumerate(vcffiles):
                 with open(os.path.join(workdir, v)) as invcf:
